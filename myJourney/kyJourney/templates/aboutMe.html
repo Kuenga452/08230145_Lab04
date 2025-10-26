@@ -1,0 +1,262 @@
+{% load static%}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>About Me - My Learning Journey</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 20px;
+            background: linear-gradient(135deg, #ff9a9e 0%, #fecfef 50%, #fecfef 100%);
+            min-height: 100vh;
+        }
+        
+        .container {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            overflow: hidden;
+        }
+        
+        .header {
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 40px;
+            text-align: center;
+        }
+        
+        .header h1 {
+            margin: 0;
+            font-size: 2.8em;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.3);
+        }
+        
+        .nav {
+            background: #f8f9fa;
+            padding: 15px;
+            text-align: center;
+            border-bottom: 1px solid #dee2e6;
+        }
+        
+        .nav a {
+            color: #667eea;
+            text-decoration: none;
+            margin: 0 20px;
+            padding: 8px 16px;
+            border-radius: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .nav a:hover {
+            background: #667eea;
+            color: white;
+        }
+        
+        .content {
+            padding: 40px;
+        }
+        
+        .profile-section {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        
+        .profile-avatar {
+            width: 150px;
+            height: 150px;
+            border-radius: 50%;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 4em;
+            color: white;
+            margin: 0 auto 20px;
+            box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+            animation: pulse 2s infinite;
+        }
+        
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.05); }
+            100% { transform: scale(1); }
+        }
+        
+        .profile-info {
+            background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);
+            padding: 30px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .profile-info h2 {
+            color: #333;
+            margin: 0 0 20px 0;
+            font-size: 2.2em;
+        }
+        
+        .info-item {
+            background: white;
+            padding: 15px;
+            margin: 15px 0;
+            border-radius: 10px;
+            box-shadow: 0 3px 10px rgba(0,0,0,0.1);
+        }
+        
+        .info-item h3 {
+            color: #667eea;
+            margin: 0 0 10px 0;
+            font-size: 1.2em;
+        }
+        
+        .info-item p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .hobbies-section {
+            background: linear-gradient(135deg, #ffecd2 0%, #fcb69f 100%);
+            padding: 25px;
+            border-radius: 15px;
+            margin: 20px 0;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+        }
+        
+        .hobbies-section h3 {
+            color: #333;
+            margin: 0 0 15px 0;
+            font-size: 1.5em;
+        }
+        
+        .hobbies-section p {
+            color: #666;
+            line-height: 1.6;
+            margin: 0;
+        }
+        
+        .no-data {
+            text-align: center;
+            padding: 60px 40px;
+            background: #f8f9fa;
+            border-radius: 15px;
+            color: #666;
+            border: 2px dashed #dee2e6;
+        }
+        
+        .no-data h2 {
+            color: #333;
+            margin-bottom: 20px;
+        }
+        
+        .admin-link {
+            display: inline-block;
+            background: #667eea;
+            color: white;
+            padding: 12px 25px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin-top: 20px;
+            transition: all 0.3s ease;
+        }
+        
+        .admin-link:hover {
+            background: #5a6fd8;
+            transform: translateY(-2px);
+        }
+        
+        .footer {
+            background: #333;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .back-link {
+            display: inline-block;
+            background: #28a745;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 25px;
+            margin: 20px 0;
+            transition: all 0.3s ease;
+        }
+        
+        .back-link:hover {
+            background: #218838;
+            transform: translateY(-2px);
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>👋 About Me</h1>
+            <p>Get to know the person behind the code</p>
+        </div>
+        
+        <nav class="nav">
+            <a href="{% url 'kyJourney:index' %}"> Home</a>
+            <a href="{% url 'kyJourney:about_me' %}"> About Me</a>
+        </nav>
+        
+        <div class="content">
+            {% if about_people %}
+                {% for person in about_people %}
+                    <div class="profile-section">
+                        <div class="profile-avatar"></div>
+                    </div>
+                    
+                    <div class="profile-info">
+                        <h2>{{ person.name }}</h2>
+                        
+                        <div class="info-item">
+                            <h3>Age</h3>
+                            <p>{{ person.age }} years old</p>
+                        </div>
+                        
+                        <div class="info-item">
+                            <h3> Bio</h3>
+                            <p>{{ person.bio }}</p>
+                        </div>
+                        
+                        {% if person.hobbies %}
+                            <div class="hobbies-section">
+                                <h3> Hobbies & Interests</h3>
+                                <p>{{ person.hobbies }}</p>
+                            </div>
+                        {% endif %}
+                    </div>
+                    
+                    {% if not forloop.last %}
+                        <hr style="margin: 40px 0; border: 1px solid #dee2e6;">
+                    {% endif %}
+                {% endfor %}
+                
+                <div style="text-align: center;">
+                    <a href="{% url 'kyJourney:index' %}" class="back-link">🏠 Back to Home</a>
+                </div>
+                
+            {% else %}
+                <div class="no-data">
+                    <h2> No Profile Information Yet</h2>
+                    <p>It looks like you haven't added any profile information yet.</p>
+                    <p>Tell us about people by adding their details in the admin panel!</p>
+                    <a href="/admin/" class="admin-link">Go to Admin Panel</a>
+                </div>
+            {% endif %}
+        </div>
+        
+        <div class="footer">
+            <p>&copy; 2024 My Learning Journey</p>
+        </div>
+    </div>
+</body>
+</html>
